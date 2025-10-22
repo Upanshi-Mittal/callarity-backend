@@ -1,22 +1,22 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
-
-
-dotenv.config();
-
+import uploadMiddleware from "./middleware/uploadMiddleware.js";
+import sttRouter from "./routes/sttRoutes.js";
 
 const app = express();
+const port = 4000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes
+app.use(uploadMiddleware); // middleware for multer memory storage
+
+app.use("/api/stt", sttRouter); // routes for STT
+
 app.get("/", (req, res) => {
-  res.send("API is running...");
+  res.status(200).send("Node backend is alive and working fine!");
 });
 
-// Server Listen
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(port, () => {
+  console.log(`Node server running on http://localhost:${port}`);
+});
