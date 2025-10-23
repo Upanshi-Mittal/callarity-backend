@@ -39,3 +39,6 @@ Thumbs.db
 # Optional: if you use Docker
 docker-compose.override.yml
 .env.local
+
+#Vosk model
+vosk-model-*/
